@@ -1,0 +1,189 @@
+.MODEL 1n4004rl d
++IS=5.31656e-08 RS=0.0392384 N=2 EG=0.6
++XTI=0.05 BV=400 IBV=5e-08 CJO=1e-11
++VJ=0.7 M=0.5 FC=0.5 TT=1e-09
++KF=0 AF=1
+* Model generated on October 12, 2003
+* Model format: SPICE3
+
+
+*LM317 TI voltage regulator - pin order: In, Adj, Out
+*TI adjustable voltage regulator pkg:TO-3
+.SUBCKT LM317 1 2 3 **Changes my be required on this line**
+J1 1 3 4 JN
+Q2 5 5 6 QPL .1
+Q3 5 8 9 QNL .2
+Q4 8 5 7 QPL .1
+Q5 81 8 3 QNL .2
+Q6 3 81 10 QPL .2
+Q7 12 81 13 QNL .2
+Q8 10 5 11 QPL .2
+Q9 14 12 10 QPL .2
+Q10 16 5 17 QPL .2
+Q11 16 14 15 QNL .2
+Q12 3 20 16 QPL .2
+Q13 1 19 20 QNL .2
+Q14 19 5 18 QPL .2
+Q15 3 21 19 QPL .2
+Q16 21 22 16 QPL .2
+Q17 21 3 24 QNL .2
+Q18 22 22 16 QPL .2
+Q19 22 3 241 QNL 2
+Q20 3 25 16 QPL .2
+Q21 25 26 3 QNL .2
+Q22A 35 35 1 QPL 2
+Q22B 16 35 1 QPL 2
+Q23 35 16 30 QNL 2
+Q24A 27 40 29 QNL .2
+Q24B 27 40 28 QNL .2
+Q25 1 31 41 QNL 5
+Q26 1 41 32 QNL 50
+D1 3 4 DZ
+D2 33 1 DZ
+D3 29 34 DZ
+R1 1 6 310
+R2 1 7 310
+R3 1 11 190
+R4 1 17 82
+R5 1 18 5.6K
+R6 4 8 100K
+R7 8 81 130
+R8 10 12 12.4K
+R9 9 3 180
+R10 13 3 4.1K
+R11 14 3 5.8K
+R12 15 3 72
+R13 20 3 5.1K
+R14 2 24 12K
+R15 24 241 2.4K
+R16 16 25 6.7K
+R17 16 40 12K
+R18 30 41 130
+R19 16 31 370
+R20 26 27 13K
+R21 27 40 400
+R22 3 41 160
+R23 33 34 18K
+R24 28 29 160
+R25 28 32 3
+R26 32 3 .1
+C1 21 3 30PF
+C2 21 2 30PF
+C3 25 26 5PF
+CBS1 5 3 2PF
+CBS2 35 3 1PF
+CBS3 22 3 1PF
+.MODEL JN NJF(BETA=1E-4 VTO=-7)
+.MODEL DZ D(BV=6.3)
+.MODEL QNL NPN(EG=1.22 BF=80 RB=100 CCS=1.5PF TF=.3NS TR=6NS CJE=2PF
++ CJC=1PF VAF=100)
+.MODEL QPL PNP(BF=40 RB=20 TF=.6NS TR=10NS CJE=1.5PF CJC=1PF VAF=50)
+.ENDS LM317 **changes may be required on this line**
+
+
+*$
+*LM337-N_TRANS
+*****************************************************************************
+* (C) Copyright 2015 Texas Instruments Incorporated. All rights reserved.
+*****************************************************************************
+** This model is designed as an aid for customers of Texas Instruments.
+** TI and its licensors and suppliers make no warranties, either expressed
+** or implied, with respect to this model, including the warranties of
+** merchantability or fitness for a particular purpose. The model is
+** provided solely on an "as is" basis. The entire risk as to its quality
+** and performance is with the customer
+*****************************************************************************
+*
+** Released by: WEBENCH Design Center, Texas Instruments Inc.
+* Part: LM337-N
+* Date: 31MAR2016 
+* Model Type: Transient
+* Simulator: PSPICE
+* Simulator Version: 16.2.0.p001
+* EVM Order Number: 
+* EVM Users Guide:  
+* Datasheet: SNVS778E –MAY 1999–REVISED JANUARY 2016
+*
+* Model Version: Final 1.00
+*
+*****************************************************************************
+*
+* Updates:
+*
+* Final 1.00
+* Release to Web
+*
+******************************************************************************
+*
+*Model Usage Notes:
+*
+*1.The following features have been modeled
+*   a. Startup
+*   b. PSRR.
+*   C. Current limit response.
+*   d. Dropout v/s Iout variation.
+*   e. Transient responses. 
+*2. Temperature effects are not been modeled.
+*   
+*****************************************************************************
+.SUBCKT LM337_N_TRANS IN ADJ OUT
+C_C5         0 N315027  1n  
+X_F1    OUT VZZ N315027 N310601 LM337_N_F1 
+C_U1_C2         0 U1_ERROR_AMP_OUT  1n  
+E_U1_ABM4         U1_N09035 0 VALUE { V(U1_REF)  
++ * (V(OUT) + 1e-6)  
++ / ((V(OUT)-V(ADJ)) + 1e-6)  }
+C_U1_C1         0 U1_REF  {1e-6*SQRT(TTRN)}  
+R_U1_R1         0 U1_REF  1G  
+V_U1_V5         U1_N11113 0 1
+X_U1_U2         U1_N12560 IN U1_N48025 VEN COMPHYS_BASIC_GEN PARAMS: VDD=1
++  VSS=0 VTHRESH=0.5
+V_U1_V3         U1_N48025 0 {UHYS}
+V_U1_V4         U1_N12560 0 {UVLO}
+R_U1_R5         U1_N09745 N222524  10 TC=0,0 
+R_U1_R3         U1_N08164 U1_REF  {3.333e5*SQRT(TTRN)} TC=0,0 
+C_U1_C3         0 N222524  1n  
+R_U1_R2         0 U1_ERROR_AMP_OUT  1G  
+E_U1_E1         U1_VDROP 0 TABLE { V(ILOAD, 0) } 
++ ( (-1.5, 2.4) (-1, 2.2) (-0.5, 1.9) (-0.2, 1.7) (-0.02, 1.55) )
+E_U1_ABM6         U1_N08164 0 VALUE { IF(V(VEN)> 0.6 & V(U1_N11113) > 0.6, 
++ {VREF}, 0)    }
+E_U1_ABM5         U1_N09745 0 VALUE { MAX(V(U1_ERROR_AMP_OUT),  
++ MIN(V(IN) + V(U1_VDROP), 0))   }
+R_U1_R4         U1_N09035 U1_ERROR_AMP_OUT  10 TC=0,0 
+R_R5         VZZ N334642  {ROUT}  
+X_H1    N334642 N315027 0 ILOAD LM337_N_H1 
+R_R6         VYY N315027  10 TC=0,0 
+R_R3         N310601 IN  3.5  
+R_R2         N222524 VXX  {PSRR*RINP}  
+R_R1         VXX N310601  {RINP}  
+C_C2         VXX N222524  {1/(6.28*PSRR*RINP*ZERO)}  
+C_C1         VXX N310601  {1/(6.28*RINP*POLE)}  
+E_ABM1         VYY 0 VALUE { {MAX(V(VXX), (V(Vzz)+(ILIM*ROUT)))}    }
+E_ABM2         N350468 0 VALUE { (V(Vzz)+(ILIM*ROUT))    }
+.PARAM  psrr=0.08e-2 uvlo=-1.9 venb=-0.9 ilim=-2.2 pole=300 rinp=1e7 zero=1e5
++  rout=10m ttrn=100n ehys=0.4 vref=-1.25 uhys=0 drop=-250m
+.ENDS LM337_N_TRANS
+.subckt LM337_N_F1 1 2 3 4  
+F_F1         3 4 VF_F1 1
+VF_F1         1 2 0V
+.ends LM337_N_F1
+*$
+.subckt LM337_N_H1 1 2 3 4  
+H_H1         3 4 VH_H1 1
+VH_H1         1 2 0V
+.ends LM337_N_H1
+*$
+.SUBCKT COMPHYS_BASIC_GEN INP INM HYS OUT PARAMS: VDD=1 VSS=0 VTHRESH=0.5	
+EIN INP1 INM1 INP INM 1 
+EHYS INP1 INP2 VALUE { IF( V(1) > {VTHRESH},-V(HYS),0) }
+EOUT OUT 0 VALUE { IF( V(INP2)>V(INM1), {VDD} ,{VSS}) }
+R1 OUT 1 1
+C1 1 0 5n
+RINP1 INP1 0 1K
+.ENDS COMPHYS_BASIC_GEN
+*$
+
+
+
+

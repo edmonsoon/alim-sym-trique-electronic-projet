@@ -1,0 +1,28 @@
+Circuit: * D:\projet\Draft1.asc
+
+Questionable use of curly braces in "b§e_abm1 vyy 0 v={max(v(vxx),(v(vzz)+({ilim}*{rout})))}"
+    Error: undefined symbol in: "max([v](vxx),(v(vzz)+((ilim)*(rout))))"
+WARNING: Less than two connections to node U2:N350468.  This node is used by E:U2:_ABM2.
+Direct Newton iteration for .op point succeeded.
+Ignoring empty pin current: Ix(u2:adj)
+Ignoring empty pin current: Ix(u2:adj)
+
+Date: Thu Jan 31 17:16:00 2019
+Total elapsed time: 0.266 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 3369
+traniter = 3321
+tranpoints = 1461
+accept = 1306
+rejected = 155
+matrix size = 115
+fillins = 132
+solver = Normal
+Thread vector: 20.1/16.3[2] 7.2/5.1[2] 5.7/3.2[2] 1.0/19.5[1]  2592/500
+Matrix Compiler1: 21,0 KB object code size  4.2/2.7/[1.4]
+Matrix Compiler2: 13,0 KB object code size  1.6/2.6/[1.1]
+
+
